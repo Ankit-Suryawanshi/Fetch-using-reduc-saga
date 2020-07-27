@@ -1,48 +1,44 @@
 import React from 'react';
 import Button from '../containers/Button';
 import DataItem from '../containers/DataItem'
-
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-//import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-//import MenuIcon from '@material-ui/icons/Menu';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
+import GlobalItem from '../containers/GlobalItem'
 
 
-let classes;
+import { Layout, Menu, Breadcrumb, Input} from 'antd';
+import './index.css'
+import 'antd/dist/antd.css';
 
-//import Loading from '../containers/Loading'
-let App = () => (
-  classes = useStyles(),
-  <div>
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            COVID19 Country Wise Data
-          </Typography>
-          <Button />
-        </Toolbar>
-      </AppBar>
-    </div>
-     <DataItem />
-  </div>
-);
+const { Search } = Input;
+const { Header, Content, Footer } = Layout;
+
+
+const App = ()=> (
+      <Layout className="layout">
+            <Header>
+                  <div className="logo" />
+                  <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
+                  <Menu.Item key="1">Dashbord</Menu.Item>
+                  <Menu.Item key="2">Blog</Menu.Item>
+                  <Menu.Item key="3">About</Menu.Item>
+                  </Menu>
+            </Header>
+            <Content style={{ padding: '0 50px' }}>
+                  <Breadcrumb style={{ margin: '16px 0' }}>
+                  {/*<Breadcrumb.Item>Home</Breadcrumb.Item>
+                  <Breadcrumb.Item>List</Breadcrumb.Item>
+                  <Breadcrumb.Item>App</Breadcrumb.Item>*/}
+                  <Search
+                        placeholder="Enter Your country name here :"
+                        onSearch={value => console.log(value)}
+                        style={{ width: 500 }}
+                  />
+                  </Breadcrumb>
+                  <div className="site-layout-content">World Data :<Button /><GlobalItem /></div>
+                  <br></br><br></br>
+                  <div className="site-layout-content">Country Wise Data :<Button /><DataItem /></div>
+            </Content>
+            <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+      </Layout>
+
+)
 export default App;

@@ -37,13 +37,10 @@ const useStyles = makeStyles({
 
 let classes=null;
 
-let DataItem = ({ article,global }) => (
+let GlobalItem = ({ article,global }) => (
   classes = useStyles(),
-	console.log(global),
- 	console.log('article  this: '+article),
 article ?
-
-<TableContainer component={Paper}>
+  <TableContainer component={Paper}>
 			<div align='center'>
 				<div class='fif'>Last Updated at : </div>
 				<div class='fif'>{ article[0].Date }</div><br></br>
@@ -52,9 +49,6 @@ article ?
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell align="right"> Country </StyledTableCell>
-            <StyledTableCell align="right"> Country Code </StyledTableCell>
-            <StyledTableCell align="right"> Date Time </StyledTableCell>
             <StyledTableCell align="right"> New Confirmed </StyledTableCell>
             <StyledTableCell align="right"> New Deaths</StyledTableCell>
             <StyledTableCell align="right"> New Recovered</StyledTableCell>
@@ -64,31 +58,25 @@ article ?
           </TableRow>
         </TableHead>
         <TableBody> 
-          {
-            article.map((data)=> (
             <StyledTableRow>
-              <StyledTableCell align="right">{data.Country}</StyledTableCell>
-              <StyledTableCell align="right">{data.CountryCode}</StyledTableCell>
-              <StyledTableCell align="right">{data.Date}</StyledTableCell>
-              <StyledTableCell align="right">{data.NewConfirmed}</StyledTableCell>
-              <StyledTableCell align="right">{data.NewDeaths}</StyledTableCell>
-              <StyledTableCell align="right">{data.NewRecovered}</StyledTableCell>
-              <StyledTableCell align="right">{data.TotalConfirmed}</StyledTableCell>
-              <StyledTableCell align="right">{data.TotalDeaths}</StyledTableCell>
-              <StyledTableCell align="right">{data.TotalRecovered}</StyledTableCell>
-            </StyledTableRow>))
-          }
+              <StyledTableCell align="right">{global.NewConfirmed}</StyledTableCell>
+              <StyledTableCell align="right">{global.NewDeaths}</StyledTableCell>
+              <StyledTableCell align="right">{global.NewRecovered}</StyledTableCell>
+              <StyledTableCell align="right">{global.TotalConfirmed}</StyledTableCell>
+              <StyledTableCell align="right">{global.TotalDeaths}</StyledTableCell>
+              <StyledTableCell align="right">{global.TotalRecovered}</StyledTableCell>
+            </StyledTableRow>
         </TableBody>
       </Table>
-    </TableContainer>
-
-: 
+  </TableContainer>
+:
 null
+
 );
 const mapStateToProps = (state) => ({
 article: state.country_data,
 global: state.global_data,
 })
-//console.log('NewsItem'+NewsItem);
-DataItem = connect(mapStateToProps,null)(DataItem)
-export default DataItem;
+
+GlobalItem = connect(mapStateToProps,null)(GlobalItem)
+export default GlobalItem;
