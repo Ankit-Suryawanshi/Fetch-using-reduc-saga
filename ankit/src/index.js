@@ -8,9 +8,6 @@ import reducer from './reducers';
 import App from './components/App';
 import rootSaga from './sagas';
 import './index.css'
-import { Layout, Menu, Breadcrumb } from 'antd';
-
-const { Header, Content, Footer } = Layout;
 
 const sagaMiddleware = createSagaMiddleware();
 

@@ -1,44 +1,42 @@
 import React from 'react';
-import Button from '../containers/Button';
-import DataItem from '../containers/DataItem'
-import GlobalItem from '../containers/GlobalItem'
+import Dashbord from './Dashbord'
+import About from './About'
+import Blog from './Blog'
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'; 
 
 
-import { Layout, Menu, Breadcrumb, Input} from 'antd';
+import { Layout, Menu, Input} from 'antd';
 import './index.css'
 import 'antd/dist/antd.css';
 
-const { Search } = Input;
-const { Header, Content, Footer } = Layout;
+const { Header,  Footer } = Layout;
 
 
 const App = ()=> (
-      <Layout className="layout">
+      <Router> 
+            <Layout className="layout">
             <Header>
                   <div className="logo" />
                   <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
-                  <Menu.Item key="1">Dashbord</Menu.Item>
-                  <Menu.Item key="2">Blog</Menu.Item>
-                  <Menu.Item key="3">About</Menu.Item>
+                        <Menu.Item key="1">
+                              <Link to="/">Dashbord</Link>
+                        </Menu.Item>
+                        <Menu.Item key="2">
+                              <Link to="/blog">Blog</Link>
+                        </Menu.Item>
+                        <Menu.Item key="3">
+                              <Link to="/about">About</Link>
+                        </Menu.Item>
                   </Menu>
             </Header>
-            <Content style={{ padding: '0 50px' }}>
-                  <Breadcrumb style={{ margin: '16px 0' }}>
-                  {/*<Breadcrumb.Item>Home</Breadcrumb.Item>
-                  <Breadcrumb.Item>List</Breadcrumb.Item>
-                  <Breadcrumb.Item>App</Breadcrumb.Item>*/}
-                  <Search
-                        placeholder="Enter Your country name here :"
-                        onSearch={value => console.log(value)}
-                        style={{ width: 500 }}
-                  />
-                  </Breadcrumb>
-                  <div className="site-layout-content">World Data :<Button /><GlobalItem /></div>
-                  <br></br><br></br>
-                  <div className="site-layout-content">Country Wise Data :<Button /><DataItem /></div>
-            </Content>
-            <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
       </Layout>
+            <Switch> 
+              <Route exact path='/' component={Dashbord}></Route> 
+              <Route exact path='/Blog' component={Blog}></Route> 
+              <Route exact path='/About' component={About}></Route> 
+            </Switch>  
+       </Router> 
+      
 
 )
 export default App;
