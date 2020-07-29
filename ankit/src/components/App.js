@@ -5,11 +5,11 @@ import Blog from './Blog'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'; 
 
 
-import { Layout, Menu, Input} from 'antd';
+import { Layout, Menu, } from 'antd';
 import './index.css'
 import 'antd/dist/antd.css';
 
-const { Header,  Footer } = Layout;
+const { Header,  } = Layout;
 
 
 const App = ()=> (
