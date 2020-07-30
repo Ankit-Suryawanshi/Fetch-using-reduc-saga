@@ -40,8 +40,8 @@ let classes=null;
 
 let GlobalItem = ({ article,global }) => (
   classes = useStyles(),
-article ?
-  <TableContainer component={Paper}>
+	article ?
+  	<TableContainer component={Paper}>
 			<div align='center'>
 				<div class='fif'>Last Updated at : </div>
 				<div class='fif'>{ article[0].Date }</div><br></br>
@@ -69,14 +69,14 @@ article ?
             </StyledTableRow>
         </TableBody>
       </Table>
-  </TableContainer>
-:
-null
+  	</TableContainer>
+	:
+	null
 
 );
 const mapStateToProps = (state) => ({
-article: state.country_data,
-global: state.global_data,
+	article: state.country_data,
+	global: state.global_data,
 })
 
 GlobalItem = connect(mapStateToProps,null)(GlobalItem)

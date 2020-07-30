@@ -13,30 +13,28 @@ const { Header,  } = Layout;
 
 
 const App = ()=> (
-      <Router> 
-            <Layout className="layout">
-            <Header>
-                  <div className="logo" />
-                  <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
-                        <Menu.Item key="1">
-                              <Link to="/">Dashbord</Link>
-                        </Menu.Item>
-                        <Menu.Item key="2">
-                              <Link to="/blog">Blog</Link>
-                        </Menu.Item>
-                        <Menu.Item key="3">
-                              <Link to="/about">About</Link>
-                        </Menu.Item>
-                  </Menu>
-            </Header>
-      </Layout>
-            <Switch> 
-              <Route exact path='/' component={Dashbord}></Route> 
-              <Route exact path='/Blog' component={Blog}></Route> 
-              <Route exact path='/About' component={About}></Route> 
-            </Switch>  
-       </Router> 
-      
-
+  <Router> 
+    <Layout className="layout">
+      <Header>
+				<div className="logo" />
+					<Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
+						<Menu.Item key="1">
+							<Link to="/">Dashbord</Link>
+						</Menu.Item>
+						<Menu.Item key="2">
+							<Link to="/blog">Blog</Link>
+						</Menu.Item>
+						<Menu.Item key="3">
+							<Link to="/about">About</Link>
+						</Menu.Item>
+					</Menu>
+			</Header>
+		</Layout>
+		<Switch> 
+			<Route exact path='/' component={Dashbord}></Route> 
+			<Route exact path='/Blog' component={Blog}></Route> 
+			<Route exact path='/About' component={About}></Route> 
+		</Switch>  
+	</Router> 
 )
 export default App;
