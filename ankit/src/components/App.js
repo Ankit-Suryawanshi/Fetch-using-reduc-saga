@@ -2,10 +2,11 @@ import React from 'react';
 import Dashbord from './Dashbord'
 import About from './About'
 import Blog from './Blog'
+import Details from '../containers/Details'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'; 
 
 
-import { Layout, Menu, } from 'antd';
+import { Layout, Menu,  } from 'antd';
 import './index.css'
 import 'antd/dist/antd.css';
 
@@ -33,7 +34,8 @@ const App = ()=> (
 		<Switch> 
 			<Route exact path='/' component={Dashbord}></Route> 
 			<Route exact path='/Blog' component={Blog}></Route> 
-			<Route exact path='/About' component={About}></Route> 
+			<Route exact path='/About' component={About}></Route>
+			<Route exact path='/Details' component={Details}></Route> 
 		</Switch>  
 	</Router> 
 )

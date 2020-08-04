@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux'
+import React from 'react';
+import { connect } from 'react-redux';
 import { Table } from 'antd';
-import './index.css'
-import {  Breadcrumb, Input} from 'antd';
-import { getFilteredData } from '../actions/index'
+import './index.css';
+import {  Breadcrumb, Input, Typography, Space} from 'antd';
+import getData,{ getFilteredData } from '../actions/index';
+import {Redirect} from 'react-router-dom';
+import Details from './Details';
+
+const { Text, } = Typography;
 const { Search } = Input;
 
 
@@ -56,36 +60,112 @@ const columns = [
 
 
 export default class DataItem extends React.Component {
+  state = {
+    msg : '',
+    redirect : '',
+  }
+  onSearchChange = (event)=> {
+    if(!event)
+      this.setState({msg : 'Please enter the correct country name',})
+    else
+      this.setState({msg : '',})
+    this.props.getFilteredData(event)
+  }
 
-onSearchChange = (event)=> {
-  console.log('in search change'+event);
-  this.props.getFilteredData(event)
-}
+  onRowClick = (record)=> {
+    console.log('I am in the on row click function:');
+    console.log(record)
+
+    this.setState({ redirect : record.Country });
+    //this.context.router.push('/details');
+
+  }
 
   render() {
-    return (
-      <div>
-        <Breadcrumb style={{ margin: '16px 0' }}>
-            <Search
-              placeholder="Enter Your country name here :"
-              onSearch={value => this.onSearchChange(value)}
-              style={{ width: 500 }}
+    if (this.state.redirect) {
+      const country = this.state.redirect
+      return <Redirect push to={`/details/${this.state.redirect}`} render={(props) => <Details {...props}/>}/>;
+    }
+    if(this.props.filter_data) {
+      return (
+        <div>
+          <Breadcrumb style={{ margin: '16px 0' }}>
+              <Search
+                placeholder="Enter Your country name here :"
+                onSearch={value => this.onSearchChange(value)}
+                style={{ width: 500 }}
+              />
+              <br></br>
+              <Space direction="vertical">
+                <Text type="danger" >{ this.state.msg}</Text>
+              </Space>
+          </Breadcrumb>
+          <br></br>
+          <h4>Country Wise Status : </h4>
+            <Table 
+              onRow={(record, rowIndex) => {
+                return {
+                  onClick: event => {this.onRowClick()
+                  }, // click row
+                  onDoubleClick: event => {}, // double click row
+                  onContextMenu: event => {}, // right button click row
+                  onMouseEnter: event => {}, // mouse enter row
+                  onMouseLeave: event => {}, // mouse leave row
+                };
+              }}
+              columns={columns} 
+              dataSource={this.props.filter_data}   
+              size="middle"
             />
-        </Breadcrumb>
-        <br></br>
-        <h4>Country Wise Status : </h4>
-        <Table columns={columns} dataSource={this.props.article} size="middle" />
-      </div>
-    );
+        </div>
+      );
+    }
+    else {
+      return (
+        <div>
+          <Breadcrumb style={{ margin: '16px 0' }}>
+              <Search
+                placeholder="Enter Your country name here :"
+                onSearch={value => this.onSearchChange(value)}
+                style={{ width: 500 }}
+              />
+              <br></br>
+              <Space direction="vertical">
+                <Text type="danger" >{ this.state.msg}</Text>
+              </Space>
+          </Breadcrumb>
+          <br></br>
+          <h4>Country Wise Status : </h4>
+            <Table 
+              onRow={(record, rowIndex) => {
+                return {
+                  onClick: event => {this.onRowClick(record)}, // click row
+                  onDoubleClick: event => {}, // double click row
+                  onContextMenu: event => {}, // right button click row
+                  onMouseEnter: event => {}, // mouse enter row
+                  onMouseLeave: event => {}, // mouse leave row
+                };
+              }}
+              columns={columns} 
+              dataSource={this.props.article}  
+              size="middle"
+            />
+        </div>
+      );
+    }
+
+    
   }
 }
 
 const mapStateToProps = (state) => ({
-	article: state.country_data,
+  article: state.country_data,
+  filter_data: state.filter_data,
 })
 
 const mapDispatchToProps = {
-	getFilteredData: getFilteredData,
+  getFilteredData: getFilteredData,
+  getData: getData,
 };
 
 DataItem = connect(mapStateToProps,mapDispatchToProps)(DataItem)

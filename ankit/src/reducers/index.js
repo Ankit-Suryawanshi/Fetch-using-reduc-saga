@@ -5,7 +5,7 @@ const reducer = (state = {}, action) => {
 		case 'COUNTRY_DATA':
 			return { ...state, country_data: action.json.Countries, global_data:action.json.Global, loading: false }
 		case 'FILTER_DATA':
-			return { ...state, country_data: state.country_data.filter(robots =>{
+			return { ...state, filter_data: state.country_data.filter(robots =>{
 				return robots.Country.toLowerCase().includes(action.text.toLowerCase())}), loading: false }
 				
 		default: 

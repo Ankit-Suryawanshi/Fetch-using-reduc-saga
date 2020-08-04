@@ -40,6 +40,7 @@ let classes=null;
 
 let GlobalItem = ({ article,global }) => (
   classes = useStyles(),
+  
 	article ?
   	<TableContainer component={Paper}>
 			<div align='center'>
