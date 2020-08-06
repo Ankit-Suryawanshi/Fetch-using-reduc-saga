@@ -1,11 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import { Table } from 'antd';
-import './index.css';
+import './index.css'
 import {  Breadcrumb, Input, Typography, Space} from 'antd';
-import getData,{ getFilteredData } from '../actions/index';
-import {Redirect} from 'react-router-dom';
-import Details from './Details';
+import { getData , getFilteredData } from '../actions/index'
+import {Redirect} from 'react-router-dom'
 
 const { Text, } = Typography;
 const { Search } = Input;
@@ -73,18 +72,15 @@ export default class DataItem extends React.Component {
   }
 
   onRowClick = (record)=> {
-    console.log('I am in the on row click function:');
-    console.log(record)
-
-    this.setState({ redirect : record.Country });
-    //this.context.router.push('/details');
+    //console.log('I am in the on row click function:');
+    localStorage.setItem('data',JSON.stringify(record))
+    this.setState({ redirect : record });
 
   }
 
   render() {
     if (this.state.redirect) {
-      const country = this.state.redirect
-      return <Redirect push to={`/details/${this.state.redirect}`} render={(props) => <Details {...props}/>}/>;
+      return <Redirect push to="/details" />;
     }
     if(this.props.filter_data) {
       return (
@@ -105,7 +101,7 @@ export default class DataItem extends React.Component {
             <Table 
               onRow={(record, rowIndex) => {
                 return {
-                  onClick: event => {this.onRowClick()
+                  onClick: event => {this.onRowClick(record)
                   }, // click row
                   onDoubleClick: event => {}, // double click row
                   onContextMenu: event => {}, // right button click row

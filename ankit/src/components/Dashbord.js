@@ -1,7 +1,7 @@
 import React from 'react';
 import DataItem from '../containers/DataItem'
 import GlobalItem from '../containers/GlobalItem'
-import  getData   from '../actions/index';
+import  { getData }   from '../actions/index';
 import { connect } from 'react-redux';
 
 

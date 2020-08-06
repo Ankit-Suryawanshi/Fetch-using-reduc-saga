@@ -6,7 +6,7 @@ import Details from '../containers/Details'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'; 
 
 
-import { Layout, Menu,  } from 'antd';
+import { Layout, Menu, } from 'antd';
 import './index.css'
 import 'antd/dist/antd.css';
 
