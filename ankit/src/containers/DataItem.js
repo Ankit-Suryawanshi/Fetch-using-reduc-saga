@@ -84,6 +84,7 @@ export default class DataItem extends Component {
     this.props.article.map((value)=>{
         let data=value.Country
         options.push({'options':[renderItem(data,10)]})
+        return null
     })
     }
     if (this.state.redirect) {

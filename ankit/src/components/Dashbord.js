@@ -4,7 +4,7 @@ import GlobalItem from '../containers/GlobalItem'
 import  { getData }   from '../actions/index';
 import { connect } from 'react-redux';
 
-import { Layout, Breadcrumb} from 'antd';
+import { Layout, Breadcrumb, Row, Col} from 'antd';
 import './index.css'
 import 'antd/dist/antd.css';
 
@@ -16,10 +16,17 @@ class Dashbord extends React.Component {
 	}
 	render() {
 		return <div>
-			<img src="https://www.who.int/images/default-source/health-topics/coronavirus/gettyimages-1203376093.tmb-1024v.png?Culture=en&sfvrsn=6e0c1bc7_6%201024w" 
-					alt="STAY HOME!!!!! STAY SAFE!!!!!" 
-					style={{width:'100%',height:'400px'}}
-			/>
+			<Row>
+				<Col span={12}>
+					<img src="https://images.financialexpress.com/2020/06/660_4-2.jpg" 
+						alt="STAY HOME!!!!! STAY SAFE!!!!!" 
+						style={{width:'100%',height:'400px'}}
+					/>
+				</Col>
+				<Col span={12}>
+				</Col>
+			</Row>
+			
 			<Layout className="layout">
 				<Content style={{ padding: '0 50px' }}>
 					<Breadcrumb style={{ margin: '16px 0' }}>
@@ -42,3 +49,4 @@ const mapDispatchToProps = {
 
 Dashbord = connect(null,mapDispatchToProps)(Dashbord);
 export default Dashbord;
+
