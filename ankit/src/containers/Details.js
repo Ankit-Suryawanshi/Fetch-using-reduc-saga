@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-//import { LineChart, XAxis, Tooltip, CartesianGrid, Line, } from 'rechart';
 import { Card } from 'antd'
 import {  getDaysData,  } from '../actions/index'
 import Confirmed from './Details/Confirmed'
@@ -52,7 +51,7 @@ export default class Details extends Component {
 			<Card
 				style={{ width: '100%'}}
 				title={<h3>{country}</h3>}
-				extra={<a href="#">More</a>}
+				extra={<a href="http://localhost:3000/details">More</a>}
 				tabList={tabList}
 				activeTabKey={this.state.key}
 				onTabChange={key => {

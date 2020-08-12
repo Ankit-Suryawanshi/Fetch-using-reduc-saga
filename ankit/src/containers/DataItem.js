@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Table } from 'antd';
 import './index.css'
-import {  Breadcrumb, Input, Typography, Space} from 'antd';
+import {  Breadcrumb, Input, Typography, Space,AutoComplete} from 'antd';
 import { getData , getFilteredData } from '../actions/index'
 import {Redirect} from 'react-router-dom'
 
+const renderItem = (title, count) => ({
+  value: title,
+});
+let options = [];
+
 const { Text, } = Typography;
-const { Search } = Input;
-
-
 const columns = [
   {
     title: 'Country',
@@ -57,8 +59,8 @@ const columns = [
   },
 ];
 
-
-export default class DataItem extends React.Component {
+//var options = [];
+export default class DataItem extends Component {
   state = {
     msg : '',
     redirect : '',
@@ -72,13 +74,18 @@ export default class DataItem extends React.Component {
   }
 
   onRowClick = (record)=> {
-    //console.log('I am in the on row click function:');
     localStorage.setItem('data',JSON.stringify(record))
     this.setState({ redirect : record });
 
   }
 
   render() {
+    if(this.props.article) {
+    this.props.article.map((value)=>{
+        let data=value.Country
+        options.push({'options':[renderItem(data,10)]})
+    })
+    }
     if (this.state.redirect) {
       return <Redirect push to="/details" />;
     }
@@ -86,23 +93,29 @@ export default class DataItem extends React.Component {
       return (
         <div>
           <Breadcrumb style={{ margin: '16px 0' }}>
-              <Search
-                placeholder="Enter Your country name here :"
-                onSearch={value => this.onSearchChange(value)}
-                style={{ width: 500 }}
-              />
+              <AutoComplete
+                dropdownClassName="certain-category-search-dropdown"
+                options={options}
+                onChange={value => this.onSearchChange(value)}
+                filterOption={true}
+                dropdownMatchSelectWidth={500}
+                style={{
+                  width: '50%',
+                }}
+              
+              >
+                <Input.Search size="large" placeholder="input here" />
+              </AutoComplete>
               <br></br>
               <Space direction="vertical">
                 <Text type="danger" >{ this.state.msg}</Text>
               </Space>
           </Breadcrumb>
           <br></br>
-          <h4>Country Wise Status : </h4>
             <Table 
               onRow={(record, rowIndex) => {
                 return {
-                  onClick: event => {this.onRowClick(record)
-                  }, // click row
+                  onClick: event => {this.onRowClick(record)}, // click row
                   onDoubleClick: event => {}, // double click row
                   onContextMenu: event => {}, // right button click row
                   onMouseEnter: event => {}, // mouse enter row
@@ -120,18 +133,24 @@ export default class DataItem extends React.Component {
       return (
         <div>
           <Breadcrumb style={{ margin: '16px 0' }}>
-              <Search
-                placeholder="Enter Your country name here :"
+              <AutoComplete
+                dropdownClassName="certain-category-search-dropdown"
+                dropdownMatchSelectWidth={500}
+                options={options}
                 onSearch={value => this.onSearchChange(value)}
-                style={{ width: 500 }}
-              />
+                style={{
+                  width: '50%',
+                }}
+                
+              >
+                <Input.Search size="large" placeholder="input here" />
+              </AutoComplete>
               <br></br>
               <Space direction="vertical">
                 <Text type="danger" >{ this.state.msg}</Text>
               </Space>
           </Breadcrumb>
           <br></br>
-          <h4>Country Wise Status : </h4>
             <Table 
               onRow={(record, rowIndex) => {
                 return {

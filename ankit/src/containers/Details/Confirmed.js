@@ -1,12 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Table } from 'antd';
-import {  Breadcrumb, Input, Typography, Space, Row, Col} from 'antd';
+import {  Row, Col} from 'antd';
 import { LineChart, Line, YAxis, XAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-
-const { Text, } = Typography;
-const { Search } = Input;
-
 
 const columns = [
   {
