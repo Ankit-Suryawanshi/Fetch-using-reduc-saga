@@ -24,6 +24,10 @@ class Dashbord extends React.Component {
 					/>
 				</Col>
 				<Col span={12}>
+					<img src="https://www.nfid.org/wp-content/uploads/2020/03/Antibiotics.png" 
+						alt="STAY HOME!!!!! STAY SAFE!!!!!" 
+						style={{width:'100%',height:'400px'}}
+					/>
 				</Col>
 			</Row>
 			
